@@ -14,6 +14,11 @@ BOT_NAME = 'cruisescrawler'
 SPIDER_MODULES = ['cruisescrawler.spiders']
 NEWSPIDER_MODULE = 'cruisescrawler.spiders'
 
+# Configure item pipelines
+# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
+ITEM_PIPELINES = {
+    'cruisescrawler.pipelines.SQLiteCruisesPipeline': 300,
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'cruisescrawler (+http://www.yourdomain.com)'
@@ -57,12 +62,6 @@ NEWSPIDER_MODULE = 'cruisescrawler.spiders'
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
 #    'scrapy.telnet.TelnetConsole': None,
-#}
-
-# Configure item pipelines
-# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'cruisescrawler.pipelines.SomePipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
