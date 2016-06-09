@@ -16,18 +16,18 @@ class FerrolSpider(Spider):
         for item in items:
             cruise = Cruise()
 
-            cruise['name'] = item.xpath('td[2]/text()').extract()
+            cruise['name'] = item.xpath('td[2]/text()').extract_first()
 
             if not cruise['name']:
                 continue
 
-            cruise['date'] = item.xpath('td[1]/text()').extract()
+            cruise['date'] = item.xpath('td[1]/text()').extract_first()
 
-            cruise['origin'] = item.xpath('td[5]/text()').extract()
-            cruise['destination'] = item.xpath('td[6]/text()').extract()
-            cruise['capacity'] = item.xpath('td[4]/text()').extract()
-            cruise['arrivalTime'] = item.xpath('td[7]/text()').extract()
-            cruise['departureTime'] = item.xpath('td[8]/text()').extract()
+            cruise['origin'] = item.xpath('td[5]/text()').extract_first()
+            cruise['destination'] = item.xpath('td[6]/text()').extract_first()
+            cruise['capacity'] = item.xpath('td[4]/text()').extract_first()
+            cruise['arrivalTime'] = item.xpath('td[7]/text()').extract_first()
+            cruise['departureTime'] = item.xpath('td[8]/text()').extract_first()
             cruise['port'] = 'FERROL'
 
             yield cruise
