@@ -11,6 +11,7 @@ from scrapy import signals
 from os import path
 from scrapy.xlib.pydispatch import dispatcher
 
+
 class CruisescrawlerPipeline(object):
     def process_item(self, item, spider):
         return item
@@ -34,9 +35,9 @@ class SQLiteCruisesPipeline(object):
                               item['origin'], item['destination'], item.get('capacity', 'N/A'),
                               item['arrivalTime'], item['departureTime'], item['port']))
             print ('Inserted cruise with name %s .Port=%s.Date=%s' % (item['name'], item['port'], item['date']))
-        except Exception, e:
+        except Exception as e:
             print ('ERROR - FAILED to insert cruise with name %s .Port=%s.Date=%s' % (item['name'], item['port'], item['date']))
-            print str(e)
+            print (str(e))
         return item
 
     def calculate_id(self, item):
@@ -55,12 +56,12 @@ class SQLiteCruisesPipeline(object):
             self.conn = None
 
     def create_table(self, db):
-        print 'creating table..'
+        print ('creating table..')
         conn = sqlite3.connect(db)
         conn.execute("CREATE TABLE cruises(id INTEGER PRIMARY KEY, date DATE, name TEXT, origin TEXT, "
                      "destination TEXT, capacity TEXT, arrivalTime TEXT, departureTime TEXT, port TEXT, "
                      "lastTouched DATE)")
         conn.commit()
-        print '..table created'
+        print ('..table created')
         return conn
 
