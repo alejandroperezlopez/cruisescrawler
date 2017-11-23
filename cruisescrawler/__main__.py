@@ -1,6 +1,6 @@
-from cruisescrawler.spiders.coruna import CorunaSpider
-from cruisescrawler.spiders.vigo import VigoSpider
-from cruisescrawler.spiders.ferrol import FerrolSpider
+from .spiders.coruna import CorunaSpider
+from .spiders.vigo import VigoSpider
+from .spiders.ferrol import FerrolSpider
 from twisted.internet import reactor, defer
 from scrapy.crawler import CrawlerRunner
 from scrapy.utils.log import configure_logging

@@ -9,6 +9,7 @@ import sqlite3
 import datetime
 from scrapy import signals
 from os import path
+from os import getenv
 from scrapy.xlib.pydispatch import dispatcher
 
 
@@ -18,7 +19,7 @@ class CruisescrawlerPipeline(object):
 
 
 class SQLiteCruisesPipeline(object):
-    db = '/PATH_TO_YOUR_DB/cruises.db'
+    db = path.join(getenv('DATA_PATH', '/srv/cruisesdb'), 'cruises.db')
 
     def __init__(self):
         self.conn = None
@@ -34,10 +35,10 @@ class SQLiteCruisesPipeline(object):
                               (generated_id, date, item['name'],
                               item['origin'], item['destination'], item.get('capacity', 'N/A'),
                               item['arrivalTime'], item['departureTime'], item['port']))
-            print ('Inserted cruise with name %s .Port=%s.Date=%s' % (item['name'], item['port'], item['date']))
+            print('Inserted cruise with name %s .Port=%s.Date=%s' % (item['name'], item['port'], item['date']))
         except Exception as e:
-            print ('ERROR - FAILED to insert cruise with name %s .Port=%s.Date=%s' % (item['name'], item['port'], item['date']))
-            print (str(e))
+            print('ERROR - FAILED to insert cruise with name %s .Port=%s.Date=%s' % (item['name'], item['port'], item['date']))
+            print(str(e))
         return item
 
     def calculate_id(self, item):
