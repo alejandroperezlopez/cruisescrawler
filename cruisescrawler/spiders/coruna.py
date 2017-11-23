@@ -1,4 +1,3 @@
-import scrapy
 from scrapy.spiders import Spider
 from scrapy.selector import Selector
 from cruisescrawler.items import Cruise
@@ -26,9 +25,17 @@ class CorunaSpider(Spider):
             cruise['date'] = item.xpath('td[1]/text()').extract_first().strip()
             cruise['origin'] = item.xpath('td[5]/text()').extract_first().strip()
             cruise['destination'] = item.xpath('td[6]/text()').extract_first().strip()
-            cruise['capacity'] = item.xpath('td[9]/text()').extract_first().strip()
-            cruise['arrivalTime'] = item.xpath('td[7]/text()').extract_first().strip()
-            cruise['departureTime'] = item.xpath('td[8]/text()').extract_first().strip()
+
+            capacity = item.xpath('td[9]/text()')
+            if capacity:
+                cruise['capacity'] = capacity.extract_first().strip()
+
+            arrival_time = item.xpath('td[7]/text()')
+            if arrival_time:
+                cruise['arrivalTime'] = arrival_time.extract_first().strip()
+            departure_time = item.xpath('td[8]/text()')
+            if departure_time:
+                cruise['departureTime'] = departure_time.extract_first().strip()
             cruise['port'] = 'CORUNA'
 
             yield cruise

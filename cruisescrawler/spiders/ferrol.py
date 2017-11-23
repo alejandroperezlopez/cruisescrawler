@@ -1,4 +1,3 @@
-import scrapy
 from scrapy.spiders import Spider
 from scrapy.selector import Selector
 from cruisescrawler.items import Cruise
